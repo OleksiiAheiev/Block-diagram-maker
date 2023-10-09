@@ -55,9 +55,7 @@ export default function DraggableBlock() {
   };
 
   const blockStyle: CSSProperties = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
-    transform: `scale(${scale})`,
+    transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
     transition: !isMoving ? "0.3s ease" : "none",
   };
 
