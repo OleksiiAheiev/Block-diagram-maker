@@ -11,6 +11,15 @@ export interface SubCategoryType {
 
 export default function CategoriesList() {
   const [categories, setCategories] = useState<SubCategoryType[]>([]);
+  const colors = [
+    "#ff9b2f",
+    "#2fafff",
+    "#bfbfbf",
+    "#fdff85",
+    "#e674fa",
+    "#74faf1",
+    "#77d891",
+  ];
 
   const handleAddCategory = () => {
     const newCategory: SubCategoryType = {
@@ -22,10 +31,12 @@ export default function CategoriesList() {
   };
 
   const handleDeleteCategory = (categoryId: string) => {
-    const updatedCategories = categories.filter(category => category.id !== categoryId);
+    const updatedCategories = categories.filter(
+      (category) => category.id !== categoryId
+    );
     setCategories(updatedCategories);
   };
-  
+
   const hasCategories = categories.length > 1;
 
   return (
@@ -37,14 +48,17 @@ export default function CategoriesList() {
         </div>
         {hasCategories && <span className="categories-list__line"></span>}
       </div>
-      <div className={`categories-list__items ${hasCategories && 'more-than-two'}`}>
-        {categories.map((category, index) => (
+      <div
+        className={`categories-list__items ${hasCategories && "more-than-two"}`}
+      >
+        {categories.map((category) => (
           <Category
             key={category.id}
             category={category}
-            level={index}
+            level={0}
             onDeleteCategory={handleDeleteCategory}
             hasCategories={hasCategories}
+            colors={colors}
           />
         ))}
       </div>

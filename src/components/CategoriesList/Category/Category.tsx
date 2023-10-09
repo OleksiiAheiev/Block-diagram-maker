@@ -9,6 +9,7 @@ interface CategoryProps {
   level: number;
   onDeleteCategory: (id: string) => void;
   hasCategories: boolean;
+  colors: string[];
 }
 
 export default function Category({
@@ -16,10 +17,12 @@ export default function Category({
   level,
   onDeleteCategory,
   hasCategories,
+  colors,
 }: CategoryProps) {
   const [subCategories, setSubCategories] = useState<SubCategoryType[]>([]);
   const [isEditing, setIsEditing] = useState(true);
   const [editedText, setEditedText] = useState(category.name);
+
 
   const categoryRef = useRef<HTMLDivElement>(null);
   // const addNewCategory = useRef<HTMLDivElement>(null);
@@ -88,7 +91,10 @@ export default function Category({
   const hasSubCategories = subCategories.length > 1;
 
   return (
-    <div className={`category ${hasCategories && "category__lines"}`} ref={categoryRef}>
+    <div
+      className={`category ${hasCategories && "category__lines"}`}
+      ref={categoryRef}
+    >
       <div className={`category__block`}>
         <span className={`category__top-line`}></span>
         {isEditing ? (
@@ -99,7 +105,9 @@ export default function Category({
             onChange={(e) => setEditedText(e.target.value)}
           />
         ) : (
-          <span className="category__block--title">{category.name}</span>
+          <span className="category__block--title" style={{ backgroundColor: colors[level % colors.length] }}>
+            {category.name}
+          </span>
         )}
         <div className="category__block--icons">
           <span onClick={handleAddSubCategory}>
@@ -126,14 +134,15 @@ export default function Category({
           hasSubCategories && " more-than-two"
         }`}
       >
-        <div className="level">
+        <div className="category__subcategories--gap">
           {subCategories.map((subCategory) => (
             <Category
               key={subCategory.id}
               category={subCategory}
-              level={level}
+              level={level + 1}
               onDeleteCategory={handleDeleteSubCategory}
               hasCategories={hasSubCategories}
+              colors={colors}
             />
           ))}
         </div>

@@ -57,7 +57,6 @@
       min-width: 130px;
       text-align: center;
       padding: 10px 20px;
-      background-color: #fff;
       border: 1px dashed #bebdbd;
     }
 
@@ -96,10 +95,10 @@
   &__subcategories {
     display: flex;
     flex-direction: column;
-  }
-}
 
-.level {
-  display: flex;
-  gap: 60px;
+    &--gap {
+      display: flex;
+      gap: 60px;
+    }
+  }
 }
