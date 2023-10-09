@@ -24,15 +24,15 @@ interface ScaleProviderProps {
 export function ScaleProvider({ children }: ScaleProviderProps) {
   const [scale, setScale] = useState(1);
 
-  const increaseScale = () => {
+  const increaseScale = (): void => {
     setScale(scale + 0.1);
   };
 
-  const decreaseScale = () => {
+  const decreaseScale = (): void => {
     setScale(scale - 0.1);
   };
 
-  const setDefaultScale = (defaultScale: number) => {
+  const setDefaultScale = (defaultScale: number): void => {
     setScale(defaultScale);
   };
 

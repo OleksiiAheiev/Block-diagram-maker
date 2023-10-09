@@ -21,7 +21,7 @@ export default function CategoriesList() {
     "#77d891",
   ];
 
-  const handleAddCategory = () => {
+  const handleAddCategory = (): void => {
     const newCategory: SubCategoryType = {
       id: `category-${categories.length}`,
       name: `Category ${categories.length + 1}`,
@@ -30,7 +30,7 @@ export default function CategoriesList() {
     setCategories([...categories, newCategory]);
   };
 
-  const handleDeleteCategory = (categoryId: string) => {
+  const handleDeleteCategory = (categoryId: string): void => {
     const updatedCategories = categories.filter(
       (category) => category.id !== categoryId
     );

@@ -57,7 +57,7 @@ export default function Category({
   //   };
   // }, [isEditing]);
 
-  const handleAddSubCategory = () => {
+  const handleAddSubCategory = (): void => {
     if (!isEditing) {
       const newSubCategory: SubCategoryType = {
         id: `sub-${subCategories.length}`,
@@ -68,20 +68,20 @@ export default function Category({
     }
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (): void => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (): void => {
     setIsEditing(false);
     category.name = editedText;
   };
 
-  const handleDeleteCategory = () => {
+  const handleDeleteCategory = (): void => {
     onDeleteCategory(category.id);
   };
 
-  const handleDeleteSubCategory = (subCategoryId: string) => {
+  const handleDeleteSubCategory = (subCategoryId: string): void => {
     const updatedSubCategories = subCategories.filter(
       (subCategory) => subCategory.id !== subCategoryId
     );

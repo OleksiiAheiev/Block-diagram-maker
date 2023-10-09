@@ -7,7 +7,7 @@ import { usePositionContext } from "../../contexts";
 export default function Header() {
   const { setBlockCentered } = usePositionContext();
 
-  const handleCenterButtonClick = () => {
+  const handleCenterButtonClick = (): void => {
     setBlockCentered(true);
   };
 

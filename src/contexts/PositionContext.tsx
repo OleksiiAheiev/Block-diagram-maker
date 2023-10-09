@@ -30,13 +30,13 @@ export function PositionProvider({ children }: PositionProviderProps) {
   const [isDraggable, setIsDraggable] = useState(true);
   const [blockCoordinates, setBlockCoordinates] = useState({ x: 0, y: 0 });
 
-  const moveBlockToCoordinates = (x: number, y: number) => {
+  const moveBlockToCoordinates = (x: number, y: number): void => {
     if (isDraggable) {
       setBlockCoordinates({ x, y });
     }
   };
 
-  const setBlockCentered = (centered: boolean) => {
+  const setBlockCentered = (centered: boolean): void => {
     if (centered) {
       setBlockCoordinates({ x: 0, y: 0 });
     }

@@ -29,7 +29,7 @@ export default function DraggableBlock() {
     setPosition({ x: blockCoordinates.x, y: blockCoordinates.y });
   }, [blockCoordinates]);
 
-  const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseDown = (e: MouseEvent<HTMLDivElement>): void => {
     if (isDraggable) {
       setIsDragging(true);
       setInitialPosition({
@@ -41,7 +41,7 @@ export default function DraggableBlock() {
     }
   };
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>): void => {
     if (isDragging) {
       const newX = e.clientX - initialPosition.x;
       const newY = e.clientY - initialPosition.y;
@@ -49,7 +49,7 @@ export default function DraggableBlock() {
     }
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (): void => {
     setIsDragging(false);
     setIsMoving(false);
   };

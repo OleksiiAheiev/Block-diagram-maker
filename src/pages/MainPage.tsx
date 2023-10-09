@@ -7,19 +7,19 @@ import { usePositionContext } from "../contexts";
 export default function MainPage() {
   const { moveBlockToCoordinates } = usePositionContext();
 
-  const moveToTop = () => {
+  const moveToTop = (): void => {
     moveBlockToCoordinates(0, -240);
   };
 
-  const moveToLeft = () => {
+  const moveToLeft = (): void => {
     moveBlockToCoordinates(500, 0);
   };
 
-  const moveToRight = () => {
+  const moveToRight = (): void => {
     moveBlockToCoordinates(-500, 0);
   };
 
-  const moveToBottom = () => {
+  const moveToBottom = (): void => {
     moveBlockToCoordinates(0, 240);
   };
 
