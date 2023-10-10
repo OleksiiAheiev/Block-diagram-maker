@@ -23,9 +23,7 @@ export default function Category({
   const [isEditing, setIsEditing] = useState(true);
   const [editedText, setEditedText] = useState(category.name);
 
-
   const categoryRef = useRef<HTMLDivElement>(null);
-  // const addNewCategory = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isEditing && categoryRef.current) {
@@ -35,27 +33,6 @@ export default function Category({
       }
     }
   }, [isEditing]);
-
-  // useEffect(() => {
-  //   const handleAddSubCategory = () => {
-  //     if (!isEditing) {
-  //       const newSubCategory: SubCategoryType = {
-  //         id: `sub-${subCategories.length}`,
-  //         name: `SubCategory ${subCategories.length + 1}`,
-  //         subCategory: [],
-  //       };
-  //       setSubCategories([...subCategories, newSubCategory]);
-  //     }
-  //   };
-
-  //   const addSubCategory = addNewCategory.current;
-
-  //   addSubCategory?.addEventListener('click', handleAddSubCategory);
-
-  //   return () => {
-  //     addSubCategory?.removeEventListener('click', handleAddSubCategory);
-  //   };
-  // }, [isEditing]);
 
   const handleAddSubCategory = (): void => {
     if (!isEditing) {
@@ -101,11 +78,15 @@ export default function Category({
           <input
             type="text"
             value={editedText}
+            name={category.id}
             className="category__block--input"
             onChange={(e) => setEditedText(e.target.value)}
           />
         ) : (
-          <span className="category__block--title" style={{ backgroundColor: colors[level % colors.length] }}>
+          <span
+            className="category__block--title"
+            style={{ backgroundColor: colors[level % colors.length] }}
+          >
             {category.name}
           </span>
         )}

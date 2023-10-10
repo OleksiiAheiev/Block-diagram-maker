@@ -3,7 +3,7 @@ import React, {
   MouseEvent,
   CSSProperties,
   useRef,
-  useEffect,
+  useCallback,
 } from "react";
 import "./draggable-block.scss";
 import CategoriesList from "../CategoriesList/CategoriesList";
@@ -20,53 +20,51 @@ export default function DraggableBlock() {
     x: blockCoordinates.x,
     y: blockCoordinates.y,
   });
-  const [initialPosition, setInitialPosition] = useState({ x: 0, y: 0 });
-  const [isMoving, setIsMoving] = useState(false);
 
-  const blockRef = useRef<HTMLDivElement | null>(null);
+  const handleMouseDown = useCallback(
+    (e: MouseEvent<HTMLDivElement>): void => {
+      if (isDraggable) {
+        setIsDragging(true);
+        const initialX = e.clientX - position.x;
+        const initialY = e.clientY - position.y;
 
-  useEffect(() => {
-    setPosition({ x: blockCoordinates.x, y: blockCoordinates.y });
-  }, [blockCoordinates]);
+        const handleMouseMove = (e: Event): void => {
+          const mouseEvent = e as unknown as MouseEvent;
+          if (
+            mouseEvent.clientX !== undefined &&
+            mouseEvent.clientY !== undefined
+          ) {
+            const newX = mouseEvent.clientX - initialX;
+            const newY = mouseEvent.clientY - initialY;
+            setPosition({ x: newX, y: newY });
+          }
+        };
 
-  const handleMouseDown = (e: MouseEvent<HTMLDivElement>): void => {
-    if (isDraggable) {
-      setIsDragging(true);
-      setInitialPosition({
-        x: e.clientX - position.x,
-        y: e.clientY - position.y,
-      });
-      setIsMoving(true);
-      moveBlockToCoordinates(position.x, position.y);
-    }
-  };
+        const handleMouseUp = (): void => {
+          setIsDragging(false);
+          window.removeEventListener("mousemove", handleMouseMove);
+          window.removeEventListener("mouseup", handleMouseUp);
+        };
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>): void => {
-    if (isDragging) {
-      const newX = e.clientX - initialPosition.x;
-      const newY = e.clientY - initialPosition.y;
-      setPosition({ x: newX, y: newY });
-    }
-  };
+        window.addEventListener("mousemove", handleMouseMove as EventListener);
+        window.addEventListener("mouseup", handleMouseUp as EventListener);
 
-  const handleMouseUp = (): void => {
-    setIsDragging(false);
-    setIsMoving(false);
-  };
+        moveBlockToCoordinates(position.x, position.y);
+      }
+    },
+    [isDraggable, position, moveBlockToCoordinates]
+  );
 
   const blockStyle: CSSProperties = {
     transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-    transition: !isMoving ? "0.3s ease" : "none",
+    transition: isDragging ? "none" : "0.3s ease",
   };
 
   return (
     <div
       className={`dnd-block ${isDragging ? "active" : ""}`}
       onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
       style={blockStyle}
-      ref={blockRef}
     >
       <CategoriesList />
     </div>

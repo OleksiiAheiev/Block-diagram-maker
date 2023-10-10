@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Category from "./Category/Category";
 import { Plus } from "../icons";
 import "./categories-list.scss";
+import colors from "../../helper";
 
 export interface SubCategoryType {
   id: string;
@@ -11,15 +12,6 @@ export interface SubCategoryType {
 
 export default function CategoriesList() {
   const [categories, setCategories] = useState<SubCategoryType[]>([]);
-  const colors = [
-    "#ff9b2f",
-    "#2fafff",
-    "#bfbfbf",
-    "#fdff85",
-    "#e674fa",
-    "#74faf1",
-    "#77d891",
-  ];
 
   const handleAddCategory = (): void => {
     const newCategory: SubCategoryType = {
