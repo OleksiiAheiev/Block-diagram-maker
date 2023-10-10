@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { Cancel, Edit, Plus, Save } from "../../icons";
 import "../categories-list.scss";
 import "./category.scss";
@@ -12,7 +12,7 @@ interface CategoryProps {
   colors: string[];
 }
 
-export default function Category({
+export default memo(function Category({
   category,
   level,
   onDeleteCategory,
@@ -130,4 +130,4 @@ export default function Category({
       </div>
     </div>
   );
-}
+});
