@@ -2,8 +2,8 @@ import React, {
   useState,
   MouseEvent,
   CSSProperties,
-  useRef,
   useCallback,
+  useEffect,
 } from "react";
 import "./draggable-block.scss";
 import CategoriesList from "../CategoriesList/CategoriesList";
@@ -20,6 +20,10 @@ export default function DraggableBlock() {
     x: blockCoordinates.x,
     y: blockCoordinates.y,
   });
+
+  useEffect(() => {
+    setPosition({ x: blockCoordinates.x, y: blockCoordinates.y });
+  }, [blockCoordinates]);
 
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLDivElement>): void => {
