@@ -14,20 +14,21 @@ export default function CategoriesList() {
   const [categories, setCategories] = useState<SubCategoryType[]>([]);
 
   const handleAddCategory = (): void => {
-    const newCategory: SubCategoryType = {
-      id: `category-${categories.length}`,
-      name: `Category ${categories.length + 1}`,
-      subCategory: [],
-    };
-    setCategories([...categories, newCategory]);
+    setCategories((prevCategories) => {
+      const newCategory: SubCategoryType = {
+        id: `category-${prevCategories.length}`,
+        name: `Category ${prevCategories.length + 1}`,
+        subCategory: [],
+      };
+      return [...prevCategories, newCategory];
+    });
   };
 
   const handleDeleteCategory = (categoryId: string): void => {
-    const updatedCategories = categories.filter(
-      (category) => category.id !== categoryId
-    );
-    setCategories(updatedCategories);
-  };
+  setCategories((prevCategories) =>
+    prevCategories.filter((category) => category.id !== categoryId)
+  );
+};
 
   const hasCategories = categories.length > 1;
 
