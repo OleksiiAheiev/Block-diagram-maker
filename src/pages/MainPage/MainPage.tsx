@@ -1,8 +1,8 @@
 import React from "react";
 import "./main-page.scss";
-import { Chevron } from "../components/icons";
-import DraggableBlock from "../components/DraggableBlock/DraggableBlock";
-import { usePositionContext } from "../contexts";
+import { Chevron } from "../../components/icons";
+import DraggableBlock from "../../components/DraggableBlock/DraggableBlock";
+import { usePositionContext } from "../../contexts";
 
 export default function MainPage() {
   const { moveBlockToCoordinates } = usePositionContext();
